@@ -23,3 +23,8 @@ Initial DBT
 dbt init dbt_workshop
 cd dbt_workshop
 ```
+Create database
+```
+docker exec -it postgresql psql -U myusername
+create database dbt
+```
