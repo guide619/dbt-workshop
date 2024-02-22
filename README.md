@@ -28,3 +28,15 @@ Create database
 docker exec -it postgresql psql -U myusername
 create database dbt
 ```
+
+## Installing Package
+1. Create packages.yml file inside dbt project
+2. Inside packages.yml file
+```
+packages:
+  - package: calogica/dbt_expectations
+    version: [">=0.8.0", "<0.9.0"]
+  - package: EqualExperts/dbt_unit_testing
+    version: 0.3.4
+```
+3. run ```dbt deps``` to install package
