@@ -1,9 +1,7 @@
--- depends_on: {{ ref('2023_supermarket_data_report') }}
-
 {{ config(tags=['unit-test']) }}
 
 {% call dbt_unit_testing.test('total_price_of_each_line_item','should find total price of each line item correctly') %}
-    {% call dbt_unit_testing.mock_ref('2023_supermarket_data_report', options={"input_format": "csv"}) %}
+    {% call dbt_unit_testing.mock_source('public', 'input_table', options={"input_format": "csv"}) %}
         id,item,quantity,price_per_unit,year,month,day
         '001','banana',3,10,2023,1,1
         '002','apple',2,15,2023,1,2

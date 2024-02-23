@@ -3,6 +3,41 @@ version: 2
 # List of models, see https://docs.getdbt.com/reference/model-properties
 
 models:
+  - name: data_quality_check
+    columns:
+      - name: id
+        tests:
+        - not_null
+        - unique
+      - name: item
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['apple', 'banana', 'lemon', 'orange', 'strawberry']
+      - name: quantity
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: integer
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+      - name: price_per_unit
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: integer
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+      - name: year
+        tests:
+          - not_null
+      - name: month
+        tests:
+          - not_null
+      - name: day
+        tests:
+          - not_null
+
   - name: total_price_of_each_line_item
     columns:
       - name: id

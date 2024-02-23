@@ -1,9 +1,7 @@
--- depends_on: {{ ref('2023_supermarket_data_report') }}
-
 {{ config(tags=['unit-test']) }}
 
 {% call dbt_unit_testing.test('highest_sell_item_for_each_month','should highest sell item for each month correctly') %}
-    {% call dbt_unit_testing.mock_ref('2023_supermarket_data_report', options={"input_format": "csv"}) %}
+    {% call dbt_unit_testing.mock_source('public', 'input_table', options={"input_format": "csv"}) %}
         id,item,quantity,price_per_unit,year,month,day
         '001','banana',3,10,2023,1,1
         '002','apple',2,15,2023,1,2

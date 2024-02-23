@@ -1,6 +1,8 @@
+{{ config(materialized='table') }}
+
 WITH total_quantity_by_item AS (
     SELECT year, month, item, SUM(quantity) AS total_quantity
-    FROM {{ dbt_unit_testing.ref('2023_supermarket_data_report') }}
+    FROM {{ dbt_unit_testing.source('public', 'input_table') }}
     GROUP BY year, month, item
     ORDER BY year ASC, month ASC, total_quantity DESC
 )
